@@ -1,0 +1,83 @@
+
+<head>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css' )}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/simplemde.min.css' )}}">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.2.0/styles/default.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.1.min.js"> </script>
+    <script src="//cdn.jsdelivr.net/highlight.js/9.2.0/highlight.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js')}}"> </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/simplemde.min.js')}}"> </script>
+
+    <style type="text/css">
+        .CodeMirror {
+            height: 300px;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function() {
+var simplemde = new SimpleMDE({
+    autofocus: true,
+    autosave: {
+        enabled: true,
+        uniqueId: "MyUniqueID",
+        delay: 1000,
+    },
+    blockStyles: {
+        bold: "__",
+        italic: "_"
+    },
+    element: document.getElementById("stmt"),
+    hideIcons: ["guide", "heading"],
+    lineWrapping: false,
+    parsingConfig: {
+        allowAtxHeaderWithoutSpace: true,
+        strikethrough: false,
+        underscoresBreakWords: true,
+    },
+    placeholder: "Type here...",
+    renderingConfig: {
+        singleLineBreaks: false,
+        codeSyntaxHighlighting: true,
+    },
+    spellChecker: false,
+    tabSize: 4,
+});
+
+        });
+
+    </script>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="page-header">
+            <h2> Ask a Question </h2>
+        </div>
+
+        <form method="post" action="/ask">
+
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" class="form-control" name="name" placeholder="Your Name..."/>
+            </div>
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" id="title" class="form-control" name="title" placeholder="Title..."/>
+            </div>
+
+            <div class="form-group">
+                <label for="stmt">Statement</label>
+                <textarea id="stmt" class="form-control" data-provide="markdown-editable" rows="10" name="desc"></textarea>
+            </div>
+
+            <button type="submit" class="btn">Ask</button>
+
+        </form>
+
+    </div>
+
+</body>
