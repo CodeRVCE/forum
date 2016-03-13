@@ -1,8 +1,8 @@
 
 <head>
-
+    <meta content='width=device-width, initial-scale=1' name='viewport'/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/my.css' )}}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css' )}}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.1.min.js"> </script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js')}}"> </script>
 
@@ -11,8 +11,16 @@
 <body>
 
     <div class="container">
-        
-        <h1 id="logo">Questions</h1>
+
+        <nav class="navbar">
+            <div class="navbar-header">
+                <h1 id="logo">Questions</h1>
+            </div>
+            <div class="navbar-right">
+                <p class="navbar-text"><a href="/ask">Ask a question</a></p>
+                <p class="navbar-text">Login</p>
+            </div>
+        </nav>
         <br><br>
         <table class="table table-hover table-condensed">
             

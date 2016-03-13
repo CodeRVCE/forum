@@ -1,13 +1,13 @@
 
 <head>
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css' )}}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/simplemde.min.css' )}}">
+    <meta content='width=device-width, initial-scale=1' name='viewport'/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.2.0/styles/default.min.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.1.min.js"> </script>
     <script src="//cdn.jsdelivr.net/highlight.js/9.2.0/highlight.min.js"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js')}}"> </script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/simplemde.min.js')}}"> </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 
     <style type="text/css">
         .CodeMirror {
@@ -17,33 +17,33 @@
 
     <script>
         $(document).ready(function() {
-var simplemde = new SimpleMDE({
-    autofocus: true,
-    autosave: {
-        enabled: true,
-        uniqueId: "MyUniqueID",
-        delay: 1000,
-    },
-    blockStyles: {
-        bold: "__",
-        italic: "_"
-    },
-    element: document.getElementById("stmt"),
-    hideIcons: ["guide", "heading"],
-    lineWrapping: false,
-    parsingConfig: {
-        allowAtxHeaderWithoutSpace: true,
-        strikethrough: false,
-        underscoresBreakWords: true,
-    },
-    placeholder: "Type here...",
-    renderingConfig: {
-        singleLineBreaks: false,
-        codeSyntaxHighlighting: true,
-    },
-    spellChecker: false,
-    tabSize: 4,
-});
+            var simplemde = new SimpleMDE({
+                autofocus: true,
+                autosave: {
+                    enabled: true,
+                    uniqueId: "MyUniqueID",
+                    delay: 1000,
+                },
+                blockStyles: {
+                    bold: "__",
+                    italic: "_"
+                },
+                element: document.getElementById("stmt"),
+                hideIcons: ["guide", "heading"],
+                lineWrapping: false,
+                parsingConfig: {
+                    allowAtxHeaderWithoutSpace: true,
+                    strikethrough: false,
+                    underscoresBreakWords: true,
+                },
+                placeholder: "Type here...",
+                renderingConfig: {
+                    singleLineBreaks: false,
+                    codeSyntaxHighlighting: true,
+                },
+                spellChecker: false,
+                tabSize: 4,
+            });
 
         });
 
