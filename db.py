@@ -57,7 +57,7 @@ class BoardDB:
         self.execute_query(query)
 
     def getall_qs(self):
-        query = 'select * from questions'
+        query = 'select * from questions order by id desc'
         cursor = self.execute_query(query)
         questions = [question for question in cursor]
         return questions
