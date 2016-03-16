@@ -67,16 +67,22 @@ def board():
 
 @app.route('/question/<qid>', methods=['GET', 'POST'])
 def question(qid):
-    if request.method == 'GET':
-        question = boardDB.get_question(qid)
-        answers = boardDB.get_answers(qid)
-        return render_template('question.html',
-                               question=question, answers=answers)
-    elif request.method == 'POST':
+    error_message = None
+    if request.method == 'POST':
         name = request.form.get('name')
         answer = request.form.get('answer')
-        boardDB.add_answer(qid, answer, name)
-        return make_response(redirect('/question/' + qid))
+        # Input validation
+        if name == '' or answer == '':
+            error_message = 'You missed one or more fields'
+        else:
+            boardDB.add_answer(qid, answer, name)
+            return make_response(redirect('/question/' + qid))
+
+    question = boardDB.get_question(qid)
+    answers = boardDB.get_answers(qid)
+    return render_template('question.html',
+                           question=question, answers=answers,
+                           error=error_message)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, threaded=True)
