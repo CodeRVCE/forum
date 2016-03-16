@@ -3,8 +3,6 @@
     <meta content='width=device-width, initial-scale=1' name='viewport'/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/my.css' )}}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.1.min.js"> </script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js')}}"> </script>
 
 </head>
 
@@ -23,8 +21,6 @@
         </nav>
         <br><br>
         <table class="table table-hover table-condensed">
-            
-            <!--- For each question there is a row in this table--->
             {% for question in questions %}
             <tr class="question-container">
                 <td class="vote-count-container" style="text-align: center;"><h3>10<br><small>points</small></h3></td>
@@ -38,13 +34,16 @@
                 </td>
             </tr>
             {% endfor %}
-
         </table>
 
-        <div class="navbar navbar-fixed-bottom" style="text-align: center;">
+        <br><br>
+
+        <div style="text-align: center;">
             <p>© 2016, Divyanshu Kakwani &lt;divkakwani@gmail.com&gt;</p>
         </div>
-
     </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 </body>
