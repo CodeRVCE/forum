@@ -12,6 +12,16 @@ app = Flask(__name__)
 cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 
 
+@app.before_request
+def before_request():
+    boardDB.setup()
+
+
+@app.teardown_request
+def teardown_request(exception):
+    boardDB.teardown()
+
+
 @app.route('/ask', methods=['GET', 'POST'])
 def ask():
     if request.method == 'GET':
