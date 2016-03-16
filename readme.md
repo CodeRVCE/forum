@@ -1,20 +1,18 @@
 
+# Forums
+Blazing-fast discussion forums. Hosted [here](http://divkakwani.pythonanywhere.com)  
 
-## Pipeline
+### Technologies
 
-* Interface - 3 pages
-    * Ask a question
-    * Answers to a question, also includes answer a question
-    * Question-board
+* Bootstrap
+* Flask
+* Database - MySQL
 
-## Technologies
 
-* Front-end framework - Bootstrap
-* Back-end flask and flask-socketio
-* Database - rethinkdb
-* UI update library - model and view separation
-
-### Components
+### TODO
 
 * Question ranking system
-
+* User accounts
+* Full-text search
+* Optimize db access
+* Client-side validation
