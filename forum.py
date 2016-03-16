@@ -36,7 +36,7 @@ def ask():
 
 
 @cache.cached(timeout=100)
-@app.route('/board', methods=['GET'])
+@app.route('/', methods=['GET'])
 def board():
     questions = cache.get('questions')
     answers_cnts = cache.get('answers_cnts')
