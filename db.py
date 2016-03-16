@@ -20,7 +20,12 @@ class BoardDB:
         self.connect()
 
     def teardown(self):
-        BoardDB.local.conn.close()
+        # conn is weak-reference to the connection object. The object may
+        # itself have been GC'ed away. Hence, in case of exception, just pass.
+        try:
+            BoardDB.local.conn.close()
+        except:
+            pass
 
     def connect(self):
         BoardDB.local.conn = MySQLdb.connect(host='localhost', user='root',
