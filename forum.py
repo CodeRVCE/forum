@@ -43,6 +43,11 @@ def ask():
         return make_response(redirect('/'))
 
 
+@app.route('/board')
+def alt_board():
+    return make_response(redirect('/'))
+
+
 @cache.cached(timeout=100)
 @app.route('/', methods=['GET'])
 def board():
