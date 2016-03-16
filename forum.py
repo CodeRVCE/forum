@@ -40,7 +40,7 @@ def ask():
 
         boardDB.add_question(title=title, desc=desc, asker=name)
         cache.delete('questions')
-        return make_response(redirect('/board'))
+        return make_response(redirect('/'))
 
 
 @cache.cached(timeout=100)
