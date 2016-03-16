@@ -65,20 +65,18 @@ def board():
                            questions=questions, answers_cnts=answers_cnts)
 
 
-@app.route('/question', methods=['GET', 'POST'])
-def question():
+@app.route('/question/<qid>', methods=['GET', 'POST'])
+def question(qid):
     if request.method == 'GET':
-        qid = request.args['id']
         question = boardDB.get_question(qid)
         answers = boardDB.get_answers(qid)
         return render_template('question.html',
                                question=question, answers=answers)
     elif request.method == 'POST':
-        qid = request.form.get('qid')
         name = request.form.get('name')
         answer = request.form.get('answer')
         boardDB.add_answer(qid, answer, name)
-        return make_response(redirect('/question?id='+qid))
+        return make_response(redirect('/question/' + qid))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, threaded=True)
