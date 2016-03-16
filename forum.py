@@ -27,9 +27,17 @@ def ask():
     if request.method == 'GET':
         return render_template('ask.html')
     elif request.method == 'POST':
+        # Get all the values from the form
         name = request.form.get('name')
         title = request.form.get('title')
         desc = request.form.get('desc')
+
+        # Check if any of the above is null. If yes, throw error
+        error = not all(len(s) for s in [name, title, desc])
+        error_message = 'You missed one or more fields'
+        if error:
+            return render_template('ask.html', error=error_message)
+
         boardDB.add_question(title=title, desc=desc, asker=name)
         cache.delete('questions')
         return make_response(redirect('/board'))

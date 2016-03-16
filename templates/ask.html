@@ -44,9 +44,6 @@
                 spellChecker: false,
                 tabSize: 4,
             });
-
-        });
-
     </script>
 
 </head>
@@ -58,7 +55,7 @@
             <h2> Ask a Question </h2>
         </div>
 
-        <form method="post" action="/ask">
+        <form method="post" id="question-form" action="/ask">
 
             <div class="form-group">
                 <label for="name">Name</label>
@@ -74,6 +71,10 @@
                 <textarea id="stmt" class="form-control" data-provide="markdown-editable" rows="10" name="desc"></textarea>
             </div>
 
+            {% if error is defined %}
+            <p class="alert alert-danger">{{ error }}</p>
+            {% endif %}
+            <br>
             <button type="submit" class="btn">Ask</button>
 
         </form>
