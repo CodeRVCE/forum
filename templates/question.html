@@ -4,21 +4,60 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/my.css' )}}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.2.0/styles/default.min.css">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.1.min.js"> </script>
-    <script type="text/javascript" src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"> </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.js"> </script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.1.min.js"> </script>
+    <script src="//cdn.jsdelivr.net/highlight.js/9.2.0/highlight.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 
-    <script type="text/javascript">
+    <style type="text/css">
+        .CodeMirror {
+            height: 300px;
+        }
+    </style>
+
+    <script>
         $(document).ready(function() {
-            md_content = $('#stmt').html();
-            html_content = marked(md_content);
-            console.log(md_content);
-            console.log(html_content);
+            hljs.initHighlightingOnLoad();
+            var md_content = $('#stmt').html();
+            var html_content = marked(md_content);
             $('#stmt').html(html_content);
-            $('pre').addClass('prettyprint');
-        });
 
+            $('.posted-answer').each(function(index, element) {
+                var md_content = $(element).html();
+                var html_content = marked(md_content);
+                $(element).html(html_content);
+            });
+
+            var simplemde = new SimpleMDE({
+                autofocus: true,
+                autosave: {
+                    enabled: true,
+                    uniqueId: "MyUniqueID",
+                    delay: 1000,
+                },
+                blockStyles: {
+                    bold: "__",
+                    italic: "_"
+                },
+                element: document.getElementById("answer"),
+                hideIcons: ["guide", "heading"],
+                lineWrapping: false,
+                parsingConfig: {
+                    allowAtxHeaderWithoutSpace: true,
+                    strikethrough: false,
+                    underscoresBreakWords: true,
+                },
+                placeholder: "Type here...",
+                renderingConfig: {
+                    singleLineBreaks: false,
+                    codeSyntaxHighlighting: true,
+                },
+                spellChecker: false,
+                tabSize: 4,
+            });
+        });
     </script>
 
 </head>
@@ -38,11 +77,9 @@
         <hr>
         <div class="answers">
             {% for answer in answers %}
-            <div class="answer">
-                <h4>
-                    {{answer[1]}}<br><br>
-                    <small>answered by {{answer[2]}}</small>
-                <h4>
+            <div>
+                <div class="posted-answer">{{answer[1]}}</div>
+                <h3><small>answered by {{answer[2]}}</small></h3>
             </div><br><br>
             {% endfor %}
         </div>
@@ -59,7 +96,7 @@
 
             <div class="form-group">
                 <label for="answer">Statement</label>
-                <textarea id="answer" class="form-control" name="answer"></textarea>
+                <textarea id="answer" class="form-control" data-provide="markdown-editable" rows="10" name="answer"></textarea>
             </div>
 
             {% if error %}
