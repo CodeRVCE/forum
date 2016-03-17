@@ -19,16 +19,21 @@
 
     <script>
         $(document).ready(function() {
-            hljs.initHighlightingOnLoad();
             var md_content = $('#stmt').html();
             var html_content = marked(md_content);
             $('#stmt').html(html_content);
-
+            
             $('.posted-answer').each(function(index, element) {
                 var md_content = $(element).html();
                 var html_content = marked(md_content);
                 $(element).html(html_content);
             });
+
+            $('code').each(function(index, element) {
+                $(element).html($(element).text());
+            });
+
+            hljs.initHighlightingOnLoad();
 
             var simplemde = new SimpleMDE({
                 autofocus: true,
@@ -69,7 +74,7 @@
         <hr>
         <div class="question-text">
             <h3>Q. {{question[1]}}</h3>
-            <div id="stmt" style="margin-left: 30px;">{{question[2] | safe}}</div>
+            <div id="stmt" style="margin-left: 30px;">{{question[2]}}</div>
             <br><h3 style="float: right;"><small>asked by {{question[3]}}</small></h3>
         </div>
         <br><br>
@@ -78,7 +83,7 @@
         <div class="answers">
             {% for answer in answers %}
             <div>
-                <div class="posted-answer">{{answer[1]}}</div>
+                <div class="posted-answer">{{ answer[1] }}</div>
                 <h3><small>answered by {{answer[2]}}</small></h3>
             </div><br><br>
             {% endfor %}

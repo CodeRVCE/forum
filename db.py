@@ -31,14 +31,14 @@ class BoardDB:
         BoardDB.local.conn = MySQLdb.connect(host='localhost', user='root',
                                              passwd='root', db='forum')
 
-    def execute_query(self, query):
+    def execute_query(self, query, param=None):
         try:
             cursor = BoardDB.local.conn.cursor()
-            cursor.execute(query)
+            cursor.execute(query, param)
         except (AttributeError, MySQLdb.OperationalError):
             self.connect()
             cursor = BoardDB.local.conn.cursor()
-            cursor.execute(query)
+            cursor.execute(query, param)
         BoardDB.local.conn.commit()
         return cursor
 
@@ -58,8 +58,8 @@ class BoardDB:
 
     def add_question(self, title, desc, asker):
         query = """insert into questions (title, description, asker)
-                   values ("%s", "%s", "%s")""" % (title, desc, asker)
-        self.execute_query(query)
+                   values (%s, %s, %s)"""
+        self.execute_query(query, (title, desc, asker))
 
     def getall_qs(self):
         query = 'select * from questions order by id desc'
@@ -69,12 +69,12 @@ class BoardDB:
 
     def add_answer(self, qid, answer, answerer):
         query = """insert into answers values
-                        (%s, "%s", "%s")""" % (qid, answer, answerer)
-        self.execute_query(query)
+                        (%s, %s, %s)"""
+        self.execute_query(query, (qid, answer, answerer))
 
     def get_answers(self, qid):
-        query = 'select * from answers where qid=%s' % qid
-        cursor = self.execute_query(query)
+        query = 'select * from answers where qid=%s'
+        cursor = self.execute_query(query, [qid])
         questions = [question for question in cursor]
         return questions
 
@@ -83,8 +83,8 @@ class BoardDB:
         return len(self.get_answers(qid))
 
     def get_question(self, qid):
-        query = 'select * from questions where id="%s"' % qid
-        cursor = self.execute_query(query)
+        query = 'select * from questions where id=%s'
+        cursor = self.execute_query(query, [qid])
         return cursor.fetchone()
 
 
