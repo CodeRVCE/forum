@@ -47,11 +47,11 @@ class BoardDB:
                                         (id bigint not null auto_increment
                                                             primary key,
                                          title varchar(200) not null,
-                                         description varchar(1000) not null,
+                                         description varchar(10000) not null,
                                          asker varchar(100) not null)"""
         create_answers_query = """create table answers
                                         (qid bigint unsigned,
-                                        answer varchar(1000),
+                                        answer varchar(10000),
                                         answerer varchar(100))"""
         self.execute_query(create_questions_query)
         self.execute_query(create_answers_query)
