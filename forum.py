@@ -76,6 +76,7 @@ def question(qid):
             error_message = 'You missed one or more fields'
         else:
             boardDB.add_answer(qid, answer, name)
+            cache.delete('answers_cnts')
             return make_response(redirect('/question/' + qid))
 
     question = boardDB.get_question(qid)
